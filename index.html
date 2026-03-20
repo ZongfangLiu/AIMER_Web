@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AIMER is a calibration-free, task-agnostic MoE pruning method that ranks experts directly from pretrained weights and preserves broad capability across 16 zero-shot benchmarks.">
+  <meta name="keywords" content="AIMER, Mixture-of-Experts, MoE pruning, calibration-free pruning, model compression, language models">
+  <meta name="author" content="Zongfang Liu, Shengkun Tang, Yifan Shen, Huan Wang, Xin Yuan">
+  <meta name="theme-color" content="#ffffff">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="AIMER">
+  <meta property="og:title" content="AIMER: Calibration-Free Task-Agnostic MoE Pruning">
+  <meta property="og:description" content="Calibration-free task-agnostic MoE pruning from pretrained weights alone.">
+  <meta property="og:image" content="static/images/aimer/ranked_abs_vs_aimer_heatmaps_all_models.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AIMER: Calibration-Free Task-Agnostic MoE Pruning">
+  <meta name="twitter:description" content="Calibration-free task-agnostic MoE pruning from pretrained weights alone.">
+  <meta name="twitter:image" content="static/images/aimer/ranked_abs_vs_aimer_heatmaps_all_models.png">
+
+  <meta name="citation_title" content="AIMER: Calibration-Free Task-Agnostic MoE Pruning">
+  <meta name="citation_author" content="Liu, Zongfang">
+  <meta name="citation_author" content="Tang, Shengkun">
+  <meta name="citation_author" content="Shen, Yifan">
+  <meta name="citation_author" content="Wang, Huan">
+  <meta name="citation_author" content="Yuan, Xin">
+  <meta name="citation_publication_date" content="2026">
+  <meta name="citation_pdf_url" content="https://arxiv.org/pdf/2603.18492.pdf">
+  <meta name="citation_doi" content="10.48550/arXiv.2603.18492">
+
+  <title>AIMER: Calibration-Free Task-Agnostic MoE Pruning</title>
+
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/bulma-carousel.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+</head>
+<body>
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">AIMER: Calibration-Free Task-Agnostic MoE Pruning</h1>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">Zongfang Liu<sup>1,2</sup>,</span>
+              <span class="author-block">Shengkun Tang<sup>3</sup>,</span>
+              <span class="author-block">Yifan Shen<sup>3</sup>,</span>
+              <span class="author-block">Huan Wang<sup>2&dagger;</sup>,</span>
+              <span class="author-block">Xin Yuan<sup>2&dagger;</sup></span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>Zhejiang University, <sup>2</sup>Westlake University, <sup>3</sup>Mohamed bin Zayed University of Artificial Intelligence</span>
+            </div>
+
+            <div class="corresponding-line">
+              <span><sup>&dagger;</sup>Corresponding authors: <a href="mailto:wanghuan@westlake.edu.cn">wanghuan@westlake.edu.cn</a>, <a href="mailto:xyuan@westlake.edu.cn">xyuan@westlake.edu.cn</a></span>
+            </div>
+
+            <div class="columns is-centered is-mobile is-multiline institution-row">
+              <div class="column is-narrow">
+                <img src="static/icons/Zhejiang_University_Logo%20(1).svg" alt="Zhejiang University" class="institution-logo institution-logo-zju">
+              </div>
+              <div class="column is-narrow">
+                <img src="static/icons/westlake.png" alt="Westlake University" class="institution-logo">
+              </div>
+              <div class="column is-narrow">
+                <img src="static/icons/mbzuai.jpeg" alt="Mohamed bin Zayed University of Artificial Intelligence" class="institution-logo">
+              </div>
+            </div>
+
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://github.com/ZongfangLiu/AIMER" target="_blank" rel="noopener" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fab fa-github"></i></span>
+                  <span>Code</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2603.18492" target="_blank" rel="noopener" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="ai ai-arxiv"></i></span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="#bibtex" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-quote-right"></i></span>
+                  <span>BibTeX</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Mixture-of-Experts language models increase parameter capacity without proportional per-token compute, but deployment still
+              requires storing all experts, making expert pruning important for reducing memory and serving overhead. Existing task-agnostic
+              expert pruning methods are typically calibration-dependent: they estimate expert importance from routing or activation statistics
+              on a calibration set, which makes pruning outcomes sensitive to the choice of calibration set and adds substantial preprocessing
+              cost. We introduce AIMER (Absolute mean over root mean square IMportance for Expert Ranking), a simple calibration-free criterion
+              that yields clear within-layer score separation and distinct expert stratification. Across 7B to 30B MoE language models at 25%
+              and 50% pruning ratios over 16 benchmarks, AIMER consistently delivers competitive or stronger overall performance against
+              state-of-the-art calibration-based expert pruning baselines with only 0.22-1.27 seconds for scoring the experts.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Overview of AIMER</h2>
+      <div class="content has-text-justified section-intro">
+        <p>
+          AIMER is a calibration-free criterion for task-agnostic MoE expert pruning. For each expert, it combines the gate, up, and down
+          projection matrices into a single weight vector and scores that expert by its mean absolute value normalized by its root mean square.
+        </p>
+      </div>
+
+      <div class="columns is-centered method-columns">
+        <div class="column is-8">
+          <div class="method-card">
+            <h3 class="title is-5 has-text-centered">AIMER score</h3>
+            <p class="equation has-text-centered">AIMER(w) = ||w||<sub>1</sub> / (sqrt(N) ||w||<sub>2</sub>)</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="columns is-centered comparison-columns">
+        <div class="column is-10">
+          <h3 class="title is-4 has-text-centered">Comparison of statistics requirements for AIMER and calibration-based baselines</h3>
+          <div class="content has-text-justified comparison-intro">
+            <p>
+              <!-- Calibration data denotes the calibration set, expert activations denotes the collected expert outputs,
+              and router weights denotes routing statistics from the MoE router.
+              Following the paper, red checkmarks indicate required signals and green crosses indicate signals that are not required. -->
+            </p>
+          </div>
+          <div class="table-container">
+            <table class="table is-fullwidth is-striped is-hoverable comparison-table">
+              <thead>
+                <tr>
+                  <th>Method</th>
+                  <th>Calibration Data</th>
+                  <th>Expert Activations</th>
+                  <th>Router Weights</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Frequency</td>
+                  <td><span class="status-symbol status-required" aria-label="Required">✓</span></td>
+                  <td><span class="status-symbol status-not-required" aria-label="Not required">×</span></td>
+                  <td><span class="status-symbol status-required" aria-label="Required">✓</span></td>
+                </tr>
+                <tr>
+                  <td>SEER</td>
+                  <td><span class="status-symbol status-required" aria-label="Required">✓</span></td>
+                  <td><span class="status-symbol status-not-required" aria-label="Not required">×</span></td>
+                  <td><span class="status-symbol status-required" aria-label="Required">✓</span></td>
+                </tr>
+                <tr>
+                  <td>EAN</td>
+                  <td><span class="status-symbol status-required" aria-label="Required">✓</span></td>
+                  <td><span class="status-symbol status-required" aria-label="Required">✓</span></td>
+                  <td><span class="status-symbol status-not-required" aria-label="Not required">×</span></td>
+                </tr>
+                <tr>
+                  <td>REAP</td>
+                  <td><span class="status-symbol status-required" aria-label="Required">✓</span></td>
+                  <td><span class="status-symbol status-required" aria-label="Required">✓</span></td>
+                  <td><span class="status-symbol status-required" aria-label="Required">✓</span></td>
+                </tr>
+                <tr class="comparison-highlight">
+                  <td>AIMER (Ours)</td>
+                  <td><span class="status-symbol status-not-required" aria-label="Not required">×</span></td>
+                  <td><span class="status-symbol status-not-required" aria-label="Not required">×</span></td>
+                  <td><span class="status-symbol status-not-required" aria-label="Not required">×</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero is-small">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <h2 class="title is-3 has-text-centered">Main Results</h2>
+        <div id="results-carousel" class="carousel results-carousel">
+          <div class="item">
+            <figure class="figure-frame">
+              <img
+                src="static/images/aimer/results_for_paper_radar_all_benchmarks_qwen_50.png"
+                alt="Radar plot of Qwen3-30B performance across benchmarks at 50 percent pruning."
+                loading="lazy"
+                class="result-figure result-figure-radar"
+                width="1568"
+                height="1837"
+              >
+            </figure>
+            <h2 class="subtitle has-text-centered">
+              <b>Qwen3-30B at 50% pruning.</b> AIMER preserves a much larger fraction of coding performance than calibration-based baselines while
+              remaining competitive on creative writing, math, and multiple-choice QA.
+            </h2>
+          </div>
+
+          <div class="item">
+            <figure class="figure-frame">
+              <img
+                src="static/images/aimer/results_for_paper_radar_all_benchmarks_ernie_25_50.png"
+                alt="Radar plots for ERNIE-21B at 25 percent and 50 percent pruning."
+                loading="lazy"
+                class="result-figure result-figure-radar"
+                width="3284"
+                height="1837"
+              >
+            </figure>
+            <h2 class="subtitle has-text-centered">
+              <b>ERNIE-21B at 25% and 50% pruning.</b> AIMER delivers the strongest overall retained capability on ERNIE, especially on coding and math.
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <img
+          src="static/images/aimer/ranked_abs_vs_aimer_heatmaps_all_models.png"
+          alt="Layer-wise comparison between raw magnitude and AIMER score profiles for OLMoE-7B, ERNIE-21B, and Qwen3-30B."
+          class="teaser-image"
+          width="2850"
+          height="1348"
+        >
+        <h2 class="subtitle has-text-left teaser-caption">
+          <b>Layer-wise Magnitude and AIMER score profiles across three MoE models.</b> Compared with raw magnitude, AIMER yields a more separable
+          within-layer distribution over experts, making pruning decisions less ambiguous near the pruning boundary.
+        </h2>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Efficiency</h2>
+      <div class="columns efficiency-cards">
+        <div class="column">
+          <div class="efficiency-card">
+            <p class="efficiency-model">OLMoE-7B</p>
+            <p class="efficiency-value">0.22 s</p>
+            <p class="efficiency-text">AIMER scoring time vs 0.75 h for REAP.</p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="efficiency-card">
+            <p class="efficiency-model">ERNIE-21B</p>
+            <p class="efficiency-value">0.51 s</p>
+            <p class="efficiency-text">AIMER scoring time vs 1.37 h for REAP.</p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="efficiency-card">
+            <p class="efficiency-model">Qwen3-30B</p>
+            <p class="efficiency-value">1.27 s</p>
+            <p class="efficiency-text">AIMER scoring time vs 2.96 h for REAP.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table class="table is-fullwidth is-striped is-hoverable efficiency-table">
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>REAP Time</th>
+              <th>AIMER Time</th>
+              <th>REAP Peak Memory</th>
+              <th>AIMER Peak Memory</th>
+              <th>Loading Memory After / Before</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>OLMoE-7B</td>
+              <td>0.75 h</td>
+              <td>0.22 s</td>
+              <td>15.51 GB</td>
+              <td>13.00 GB</td>
+              <td>6.89 / 12.89 GB</td>
+            </tr>
+            <tr>
+              <td>ERNIE-21B</td>
+              <td>1.37 h</td>
+              <td>0.51 s</td>
+              <td>44.72 GB</td>
+              <td>40.85 GB</td>
+              <td>21.67 / 40.66 GB</td>
+            </tr>
+            <tr>
+              <td>Qwen3-30B</td>
+              <td>2.96 h</td>
+              <td>1.27 s</td>
+              <td>63.07 GB</td>
+              <td>57.01 GB</td>
+              <td>29.93 / 56.92 GB</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="bibtex">
+    <div class="container is-max-desktop content">
+      <div class="bibtex-header">
+        <h2 class="title">BibTeX</h2>
+        <button class="copy-bibtex-btn" type="button" aria-label="Copy BibTeX">
+          <i class="fas fa-copy"></i>
+          <span class="copy-text">Copy</span>
+        </button>
+      </div>
+      <pre id="bibtex-code"><code>@misc{liu2026aimercalibrationfreetaskagnosticmoe,
+  title={AIMER: Calibration-Free Task-Agnostic MoE Pruning},
+  author={Zongfang Liu and Shengkun Tang and Yifan Shen and Huan Wang and Xin Yuan},
+  year={2026},
+  eprint={2603.18492},
+  archivePrefix={arXiv},
+  primaryClass={cs.LG},
+  url={https://arxiv.org/abs/2603.18492},
+}</code></pre>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank" rel="noopener">Academic Project Page Template</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,299 @@
+body {
+  font-family: "Noto Sans", sans-serif;
+  color: #111827;
+}
+
+.footer .icon-link {
+  font-size: 25px;
+  color: #000;
+}
+
+.link-block a {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.teaser .hero-body {
+  padding-top: 0;
+  padding-bottom: 3rem;
+}
+
+.publication-title,
+.publication-authors,
+.corresponding-line {
+  font-family: "Google Sans", sans-serif;
+}
+
+.publication-title {
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.publication-authors a {
+  color: hsl(204deg 86% 53%) !important;
+}
+
+.publication-authors a:hover {
+  text-decoration: underline;
+}
+
+.author-block {
+  display: inline-block;
+}
+
+.corresponding-line {
+  font-size: 15px;
+  margin-top: 0.75rem;
+}
+
+.institution-row {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  align-items: center;
+}
+
+.institution-logo {
+  display: block;
+  height: 88px;
+  width: auto;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+.institution-logo-zju {
+  height: 112px;
+}
+
+.teaser-image,
+.figure-frame img,
+.visual-card img {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
+  margin: 0 auto;
+}
+
+.teaser-image {
+  width: 95%;
+}
+
+.teaser-caption {
+  margin-top: 1.25rem;
+}
+
+.section-intro {
+  max-width: 920px;
+  margin: 0 auto 1.5rem;
+}
+
+.method-columns {
+  margin-top: 0.5rem;
+}
+
+.comparison-columns {
+  margin-top: 1.25rem;
+}
+
+.comparison-intro {
+  max-width: 760px;
+  margin: 0 auto 0.75rem;
+}
+
+.method-card {
+  padding: 1.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 6%);
+}
+
+.method-card .title {
+  margin-bottom: 0.85rem;
+}
+
+.equation {
+  margin-bottom: 1rem;
+  font-family: "Castoro", serif;
+  font-size: 1.5rem;
+  line-height: 1.4;
+}
+
+.metric-list {
+  margin: 0 0 1rem 1.25rem;
+}
+
+.metric-list li {
+  margin-bottom: 0.45rem;
+}
+
+.results-carousel {
+  overflow: hidden;
+}
+
+.results-carousel .item {
+  margin: 5px;
+  overflow: hidden;
+  padding: 20px;
+  font-size: 1rem;
+}
+
+.result-figure {
+  display: block;
+  max-width: 100%;
+  max-height: 580px;
+  width: auto;
+  object-fit: contain;
+}
+
+.result-figure-radar {
+  max-height: 500px;
+}
+
+.results-carousel .subtitle {
+  line-height: 1.65;
+}
+
+.comparison-table {
+  margin-top: 0.5rem;
+}
+
+.comparison-table th,
+.comparison-table td {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.comparison-table th:first-child,
+.comparison-table td:first-child {
+  text-align: left;
+}
+
+.comparison-highlight {
+  background: #ecfdf5;
+  font-weight: 700;
+}
+
+.status-symbol {
+  display: inline-block;
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.status-required {
+  color: #ef4444;
+}
+
+.status-not-required {
+  color: #16a34a;
+}
+
+.efficiency-cards {
+  margin-bottom: 1rem;
+}
+
+.efficiency-card {
+  height: 100%;
+  padding: 1.35rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 6px 18px rgb(0 0 0 / 6%);
+  text-align: center;
+}
+
+.efficiency-model {
+  margin-bottom: 0.35rem;
+  font-family: "Google Sans", sans-serif;
+  font-weight: 700;
+  color: #374151;
+}
+
+.efficiency-value {
+  margin-bottom: 0.5rem;
+  font-family: "Google Sans", sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2563eb;
+}
+
+.efficiency-text {
+  color: #4b5563;
+}
+
+.efficiency-table {
+  margin-top: 0.5rem;
+}
+
+.efficiency-table th,
+.efficiency-table td {
+  vertical-align: middle;
+}
+
+.bibtex-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.copy-bibtex-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.65rem 0.95rem;
+  border: 1px solid #d1d5db;
+  border-radius: 999px;
+  background: #fff;
+  color: #111827;
+  font: inherit;
+  cursor: pointer;
+  transition: background-color 160ms ease, border-color 160ms ease;
+}
+
+.copy-bibtex-btn:hover {
+  border-color: #9ca3af;
+  background: #f9fafb;
+}
+
+.copy-bibtex-btn.copied {
+  border-color: #93c5fd;
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+pre {
+  border-radius: 12px;
+  background: #f3f4f6;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+}
+
+@media screen and (max-width: 768px) {
+  .publication-title {
+    font-size: 2.25rem !important;
+  }
+
+  .results-carousel .item {
+    padding: 12px;
+  }
+
+  .result-figure {
+    max-height: 430px;
+  }
+
+  .result-figure-radar {
+    max-height: 360px;
+  }
+
+  .equation {
+    font-size: 1.2rem;
+  }
+
+  .institution-logo {
+    height: 72px;
+  }
+
+  .institution-logo-zju {
+    height: 88px;
+  }
+}
