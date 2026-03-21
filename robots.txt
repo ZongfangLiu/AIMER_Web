@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://zongfangliu.github.io/AIMER_Web/sitemap.xml
